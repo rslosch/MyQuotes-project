@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
     #REMOVE Skip for :show eventually
-    skip_before_action :authorize, only: [:create, :show]
+    skip_before_action :authorize, only: [:create]
 
     #signup
     def create
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     def show
         #Get current user
         user = User.find_by(id: session[:user_id])
-        render json: user, status: :created
+            render json: user, status: :created
     end
 
     private
