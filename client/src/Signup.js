@@ -31,8 +31,8 @@ const Signup = () => {
                 setUsername("")
                 setPassword("")
                 setPasswordConfirmation("")
-                const erorrLis = user.errors.map(error => <li key={error.id}> {error} </li>)
-                setErrorsList(erorrLis)
+                const errorLis = user.errors.map(error => <li key={error.id}> {error} </li>)
+                setErrorsList(errorLis)
             }
         })
     }
