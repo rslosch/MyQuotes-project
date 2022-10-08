@@ -13,12 +13,12 @@ function UserProvider({ children }) {
         .then(data => setUser(data))
     }, [])
     
-    const login = () => {
-        
+    const login = (user) => {
+        setUser(user)
     }
 
     const logout = () => {
-        
+        setUser(null)
     }
 
     const signup = (user) => {
