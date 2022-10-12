@@ -1,15 +1,16 @@
 import React, { useContext } from 'react'
 import { UserContext } from './context/user'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, NavLink } from 'react-router-dom'
 import Signup from './Signup'
 
 const Home = () => {
-    const  { user } = useContext(UserContext)
+    const  { user, loggedIn } = useContext(UserContext)
     // const navigate = useNavigate()
 
-    if(!user || user.error){
+    if(!loggedIn){
         return (
-            <Signup />
+            // <Signup />
+            <h1> Please Login or Signup </h1>
             // navigate("/signup")
         )
     } else {
