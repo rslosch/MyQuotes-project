@@ -4,4 +4,5 @@ class User < ApplicationRecord
     has_many :books, through: :excerpts 
 
     validates :username, :password, :password_confirmation, presence: true
+    validates :username, uniqueness: true
 end
