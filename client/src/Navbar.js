@@ -21,6 +21,9 @@ const Navbar = () => {
     return (
       <div>
         <h1> Hello {user.username} </h1>
+        <NavLink to='/books'>
+          <button>Books</button>  
+        </NavLink>
         <button onClick={logoutUser}>Logout</button>
         <hr/>
       </div>
