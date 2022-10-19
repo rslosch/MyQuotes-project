@@ -57,16 +57,19 @@ function UserProvider({ children }) {
     
     const login = (user) => {
         setUser(user)
+        fetchBooks()
         setLoggedIn(true)
     }
 
     const logout = () => {
         setUser({})
+        setBooks([])
         setLoggedIn(false)
     }
 
     const signup = (user) => {
         setUser(user)
+        fetchBooks()
         setLoggedIn(true)
     }
 
