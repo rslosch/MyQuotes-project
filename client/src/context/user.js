@@ -7,15 +7,53 @@ const UserContext = React.createContext()
 function UserProvider({ children }) {
     const [user, setUser] = useState({})
     const [loggedIn, setLoggedIn] = useState(false)
+    const [books, setBooks] = useState([])
 
     useEffect(() => {
         fetch('/me')
         .then(res => res.json())
         .then(data => {
             setUser(data)
-            data.error ? setLoggedIn(false) : setLoggedIn(true)
+            if(data.error){
+                setLoggedIn(false)
+            } else {
+                setLoggedIn(true)
+                fetchBooks()
+            }
         })
     }, [])
+
+    const fetchBooks = () => {
+        fetch('/books')
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            setBooks(data) 
+        })
+    }
+
+    const addBook = (book) => {
+        fetch('/books', {
+            method: 'POST',
+            headers: { 'Content-Type' : 'application/json' },
+            body: JSON.stringify(book)
+        })
+        .then(res => res.json())
+        .then(data => {
+            setBooks([...books, data])
+        })
+    }
+
+    // const deleteBook = (book) => {
+    //     fetch('/books', {
+    //         method: 'DELETE',
+    //         headers: { 'Content-Type' : 'application/json' }
+    //     })
+    //     .then(() => {
+    //         const updatedBooks = books.filter(b => b.id != book.id)
+    //         setBooks(updatedBooks)
+    //     })
+    // }
     
     const login = (user) => {
         setUser(user)
@@ -33,7 +71,7 @@ function UserProvider({ children }) {
     }
 
     return (
-        <UserContext.Provider value = {{user, login, logout, signup, loggedIn}}>
+        <UserContext.Provider value = {{user, login, logout, signup, loggedIn, books, fetchBooks, addBook, /*deleteBook*/}}>
             {children}
         </UserContext.Provider>
     )
