@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { UserContext } from './context/user'
 
-const BookForm = () => {
+const BookForm = ({addBookFlag}) => {
     const [author, setAuthor] = useState("")
     const [title, setTitle] = useState("")
     const { addBook } = useContext(UserContext)
@@ -14,6 +14,7 @@ const BookForm = () => {
         })
         setAuthor("")
         setTitle("")
+        addBookFlag()
     }
  
   return (

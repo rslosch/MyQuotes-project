@@ -8,6 +8,11 @@ const Books = () => {
     const { loggedIn, books } = useContext(UserContext)
     const [formFlag, setFormFlag] = useState(false)
     const params = useParams()
+
+    const addBookFlag = () => {
+        setFormFlag(false)
+    }
+ 
     
     if (loggedIn) {
         const booksList = books.map(b => <li key={b.id} >{b.title}</li>)
@@ -18,7 +23,7 @@ const Books = () => {
                 {booksList}
                 <br/>
                 {formFlag ?
-                    <BookForm />
+                    <BookForm addBookFlag={addBookFlag} />
                     :
                     <button onClick={() => setFormFlag(true)}>Add Book</button>
                 }
