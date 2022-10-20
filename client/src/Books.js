@@ -5,17 +5,23 @@ import { UserContext } from './context/user'
 
 const Books = () => {
 
-    const { loggedIn, books } = useContext(UserContext)
+    const { loggedIn, books, deleteBook } = useContext(UserContext)
     const [formFlag, setFormFlag] = useState(false)
     const params = useParams()
 
     const addBookFlag = () => {
         setFormFlag(false)
     }
- 
     
     if (loggedIn) {
-        const booksList = books.map(b => <li key={b.id} >{b.title}</li>)
+        const booksList = books.map(b => {
+            return (
+                <>
+                    <li key={b.id} >{b.title}</li>
+                    <button id={b.id} onClick={(e) => deleteBook(e.target.id)}> Delete </button>
+                </>
+            )
+        })   
         return (
             <div>
                 <h1>Books </h1>

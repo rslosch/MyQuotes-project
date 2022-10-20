@@ -44,16 +44,16 @@ function UserProvider({ children }) {
         })
     }
 
-    // const deleteBook = (book) => {
-    //     fetch('/books', {
-    //         method: 'DELETE',
-    //         headers: { 'Content-Type' : 'application/json' }
-    //     })
-    //     .then(() => {
-    //         const updatedBooks = books.filter(b => b.id != book.id)
-    //         setBooks(updatedBooks)
-    //     })
-    // }
+    const deleteBook = (bookID) => {
+        fetch(`/books/${bookID}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type' : 'application/json' }
+        })
+        .then(() => {
+            const updatedBooks = books.filter(b => b.id != bookID)
+            setBooks(updatedBooks)
+        })
+    }
     
     const login = (user) => {
         setUser(user)
@@ -74,7 +74,7 @@ function UserProvider({ children }) {
     }
 
     return (
-        <UserContext.Provider value = {{user, login, logout, signup, loggedIn, books, fetchBooks, addBook, /*deleteBook*/}}>
+        <UserContext.Provider value = {{user, login, logout, signup, loggedIn, books, fetchBooks, addBook, deleteBook}}>
             {children}
         </UserContext.Provider>
     )
