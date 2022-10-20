@@ -8,6 +8,7 @@ function UserProvider({ children }) {
     const [user, setUser] = useState({})
     const [loggedIn, setLoggedIn] = useState(false)
     const [books, setBooks] = useState([])
+    const [currentBook, setCurrentBook] = useState({})
 
     useEffect(() => {
         fetch('/me')
@@ -27,8 +28,17 @@ function UserProvider({ children }) {
         fetch('/books')
         .then(res => res.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
             setBooks(data) 
+        })
+    }
+
+    const showBook = (id) => {
+        fetch(`/books/${id}`)
+        .then(res => res.json())
+        .then(d => {
+            console.log(d)
+            setCurrentBook(d)
         })
     }
 
@@ -44,13 +54,13 @@ function UserProvider({ children }) {
         })
     }
 
-    const deleteBook = (bookID) => {
-        fetch(`/books/${bookID}`, {
+    const deleteBook = (bookId) => {
+        fetch(`/books/${bookId}`, {
             method: 'DELETE',
             headers: { 'Content-Type' : 'application/json' }
         })
         .then(() => {
-            const updatedBooks = books.filter(b => b.id != bookID)
+            const updatedBooks = books.filter(b => b.id !== bookId)
             setBooks(updatedBooks)
         })
     }
@@ -74,7 +84,7 @@ function UserProvider({ children }) {
     }
 
     return (
-        <UserContext.Provider value = {{user, login, logout, signup, loggedIn, books, fetchBooks, addBook, deleteBook}}>
+        <UserContext.Provider value = {{user, login, logout, signup, loggedIn, books, fetchBooks, addBook, deleteBook, showBook, currentBook}}>
             {children}
         </UserContext.Provider>
     )

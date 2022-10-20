@@ -6,6 +6,7 @@ import Home from './Home'
 import Signup from './Signup'
 import Login from './Login'
 import Books from './Books'
+import Book from './Book';
 import { UserProvider } from './context/user'
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/books" element={<Books />} />
+          <Route exact path="/books/:id" element={<Book />} />
         </Routes>
       </UserProvider>
     </div>

@@ -1,11 +1,12 @@
 import React, { useState, useContext } from 'react'
 import BookForm from './BookForm'
-import { Route, useParams } from 'react-router-dom'
+import Book from './Book'
+import { Route, useParams, Link } from 'react-router-dom'
 import { UserContext } from './context/user'
 
 const Books = () => {
 
-    const { loggedIn, books, deleteBook } = useContext(UserContext)
+    const { loggedIn, books, deleteBook, showBook } = useContext(UserContext)
     const [formFlag, setFormFlag] = useState(false)
     const params = useParams()
 
@@ -16,10 +17,10 @@ const Books = () => {
     if (loggedIn) {
         const booksList = books.map(b => {
             return (
-                <>
-                    <li key={b.id} >{b.title}</li>
+                <Link to={`/books/${b.id}`} key={b.id}>
+                    <li>{b.title}: {b.author}</li>
                     <button id={b.id} onClick={(e) => deleteBook(e.target.id)}> Delete </button>
-                </>
+                </Link>
             )
         })   
         return (
