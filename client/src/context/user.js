@@ -54,13 +54,26 @@ function UserProvider({ children }) {
         })
     }
 
+    const updateBook = (id, book) => {
+        fetch(`/books/${id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type' : 'application/json' },
+            body: JSON.stringify(book)
+        })
+        .then(res => res.json())
+        .then(data => {
+            const updatedBooks = books.map(b => b.id === data.id ? data : b)
+            setBooks(updatedBooks)
+        })
+    }
+
     const deleteBook = (bookId) => {
         fetch(`/books/${bookId}`, {
             method: 'DELETE',
             headers: { 'Content-Type' : 'application/json' }
         })
         .then(() => {
-            const updatedBooks = books.filter(b => b.id !== bookId)
+            const updatedBooks = books.filter(b => b.id != bookId)
             setBooks(updatedBooks)
         })
     }
@@ -84,7 +97,7 @@ function UserProvider({ children }) {
     }
 
     return (
-        <UserContext.Provider value = {{user, login, logout, signup, loggedIn, books, fetchBooks, addBook, deleteBook, showBook, currentBook}}>
+        <UserContext.Provider value = {{user, login, logout, signup, loggedIn, books, fetchBooks, addBook, deleteBook, showBook, currentBook, updateBook}}>
             {children}
         </UserContext.Provider>
     )
