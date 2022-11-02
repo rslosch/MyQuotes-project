@@ -31,7 +31,9 @@ const Books = () => {
                     <Link to={`/books/${b.id}`} key={b.id}>
                         <li>{b.title}: {b.author}</li>
                     </Link>
-                    <button id={b.id} onClick={(e) => handleEditClick(b.id)}> Edit </button>
+                    <Link to={`/books/${b.id}/edit`}>
+                        <button id={b.id} onClick={(e) => handleEditClick(b.id)}> Edit </button>
+                    </Link>
                     <button id={b.id} onClick={(e) => deleteBook(e.target.id)}> Delete </button>
                 </>
             )
@@ -41,6 +43,7 @@ const Books = () => {
                 <h1>Books </h1>
                 <br/>
                 {booksList}
+                <br/>
                 <br/>
                 {formFlag ?
                     <BookForm addBookFlag={addBookFlag} />
@@ -53,10 +56,7 @@ const Books = () => {
                     :
                     null
                 }
-
             </div>
-
-            
         )
     } else {
         return (
