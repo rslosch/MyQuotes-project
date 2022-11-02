@@ -16,7 +16,10 @@ const Home = () => {
     } else {
         return (
             <div>
-                <h1>{user.username} Home </h1>
+                <h1>{user.username}'s Homepage</h1>
+                <h2> Welcome to your MyBooks Library App! </h2>
+                <h4> Easily store and record memorable quotes from your recently read books.</h4>
+                <h4> Visit the books tab to get started!</h4>
             </div>
         )
      }
