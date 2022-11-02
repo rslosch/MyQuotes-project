@@ -1,10 +1,19 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import { UserContext } from './context/user'
 
 const EditBookForm = ({editBookFlag}) => {
-    const { updateBook, currentBook } = useContext(UserContext)
-    const [author, setAuthor] = useState(currentBook.author)
-    const [title, setTitle] = useState(currentBook.title)
+    const { updateBook, currentBook, fetchBooks, books } = useContext(UserContext)
+    const { id } = useParams()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        fetchBooks()
+    },[])
+
+    const currBook = books.find(book => book.id == id)
+    const [author, setAuthor] = useState(currBook.author)
+    const [title, setTitle] = useState(currBook.title)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -12,9 +21,9 @@ const EditBookForm = ({editBookFlag}) => {
             author: author,
             title: title
         })
-        setAuthor(currentBook.author)
-        setTitle(currentBook.title) //Fix
-        editBookFlag()
+        console.log("book title in state" + title)
+        console.log("current book title " , currBook.title)
+        navigate(`/books/${id}`)
     }
  
   return (
@@ -33,7 +42,7 @@ const EditBookForm = ({editBookFlag}) => {
             value={author}
             onChange={e => setAuthor(e.target.value)}
         /> <br/>
-        <input type="submit"/>
+        <input type="submit" value="Save Changes"/>
     </form>
   )
 }
