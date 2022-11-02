@@ -3,5 +3,6 @@ class Book < ApplicationRecord
     has_many :users, through: :excerpts
 
     validates :author, :title, presence: true
+    validates :title, uniqueness: true
 
 end

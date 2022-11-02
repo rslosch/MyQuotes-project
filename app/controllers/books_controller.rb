@@ -1,7 +1,8 @@
 class BooksController < ApplicationController
 
     def create
-        book = current_user.books.create(book_params)
+        # book = current_user.books.create(book_params)
+        book = Book.create(book_params)
         if book.valid?
             render json: book
         else
@@ -10,12 +11,16 @@ class BooksController < ApplicationController
     end
 
     def index
-        books = current_user.books
+        books = Book.all.uniq
+        # books = current_user.books.uniq 
         render json: books
     end
 
+    #comment this out
     def show
-        book = current_user.books.find_by(id: params[:id])
+        # book = current_user.books.find_by(id: params[:id])
+        book = Book.find_by(id: params[:id])
+
         if book
             render json: book
         else
@@ -24,7 +29,8 @@ class BooksController < ApplicationController
     end
 
     def update
-        book = current_user.books.find_by(id: params[:id])
+        # book = current_user.books.find_by(id: params[:id])
+        book = Book.find_by(id: params[:id])
         if book
             book.update(book_params)
             render json: book
@@ -34,7 +40,8 @@ class BooksController < ApplicationController
     end
 
     def destroy
-        book = current_user.books.find_by(id: params[:id])
+        # book = current_user.books.find_by(id: params[:id])
+        book = Book.find_by(id: params[:id])
         book.destroy
     end
 
