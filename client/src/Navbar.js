@@ -20,9 +20,12 @@ const Navbar = () => {
   if(loggedIn){
     return (
       <div>
-        <h1> Hello {user.username} </h1>
+        <h1> {user.username} is logged in</h1>
         <NavLink to='/books'>
           <button>Books</button>  
+        </NavLink>
+        <NavLink to='/excerpts/new'>
+          <button>Add a new Excerpt</button>  
         </NavLink>
         <button onClick={logoutUser}>Logout</button>
         <hr/>
