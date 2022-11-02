@@ -2,14 +2,14 @@ import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from './context/user'
 
-const ExcerptOnlyForm = ({parentBookId}) => {
+const ExcerptOnlyForm = ({parentBookId, paramBookId}) => {
 
     const { books, addExcerpt } = useContext(UserContext)
     const [form, setForm] = useState({
         quote: "",
         context: "",
         page: "",
-        bookId: parentBookId
+        bookId: parentBookId || paramBookId
     })
     const navigate = useNavigate()
     
