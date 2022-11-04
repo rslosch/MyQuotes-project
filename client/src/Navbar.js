@@ -25,7 +25,7 @@ const Navbar = () => {
           <button>Home</button>  
         </NavLink>
         <NavLink to='/excerpts'>
-          <button>My Excerpts</button>  
+          <button>My Quotes</button>  
         </NavLink>
         <NavLink to='/books'>
           <button>Book Library</button>  

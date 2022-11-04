@@ -20,7 +20,7 @@ const ChooseExcerptForm = () => {
 
     return (
         <>
-            <label htmlFor="books_dropdown"> Which Book is the Excerpt from? </label>
+            <label htmlFor="books_dropdown"> Which Book is the Quote from? </label>
             <select name="books_dropdown" id="bookId" onChange={handleChange}>
                 <option id="newBook" value="new">New Book</option>
                 { books.map(book => {
