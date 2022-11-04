@@ -21,11 +21,14 @@ const Navbar = () => {
     return (
       <div>
         <h1> {user.username} is logged in</h1>
-        <NavLink to='/books'>
-          <button>Books</button>  
+        <NavLink to='/'>
+          <button>Home</button>  
         </NavLink>
-        <NavLink to='/excerpts/new'>
-          <button>Add a new Excerpt</button>  
+        <NavLink to='/excerpts'>
+          <button>My Excerpts</button>  
+        </NavLink>
+        <NavLink to='/books'>
+          <button>Book Library</button>  
         </NavLink>
         <button onClick={logoutUser}>Logout</button>
         <hr/>
