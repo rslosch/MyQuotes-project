@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react'
+import { json } from 'react-router-dom'
 
 //Create the context object
 const UserContext = React.createContext()
 
 //Create the context provider component
 function UserProvider({ children }) {
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState({
+        unique_books: []
+    })
     const [loggedIn, setLoggedIn] = useState(false)
     const [books, setBooks] = useState([])
+    const [excerpts, setExcerpts] = useState([])
     const [currentBook, setCurrentBook] = useState({})
 
     useEffect(() => {
@@ -28,8 +32,7 @@ function UserProvider({ children }) {
         fetch('/books')
         .then(res => res.json())
         .then(data => {
-            // console.log(data)
-            setBooks(data) 
+            setBooks(data)
         })
     }
 
@@ -37,20 +40,31 @@ function UserProvider({ children }) {
         fetch(`/books/${id}`)
         .then(res => res.json())
         .then(d => {
-            console.log(d)
             setCurrentBook(d)
         })
     }
 
-    const addBook = (book) => {
+    const addBook = (form) => {
         fetch('/books', {
             method: 'POST',
             headers: { 'Content-Type' : 'application/json' },
-            body: JSON.stringify(book)
+            body: JSON.stringify({
+                book: {
+                    author: form.author,
+                    title: form.title,
+                    excerpts_attributes: [{
+                        quote: form.quote,
+                        context: form.context,
+                        page: parseInt(form.page),
+                        user_id: user.id
+                    }]
+                }
+            })
         })
         .then(res => res.json())
         .then(data => {
             setBooks([...books, data])
+            getExcerpts()
         })
     }
 
@@ -77,6 +91,26 @@ function UserProvider({ children }) {
             setBooks(updatedBooks)
         })
     }
+
+    const getExcerpts = () => {
+        fetch('/excerpts')
+        .then(res => res.json())
+        .then(d => {
+            setExcerpts(d)
+        })
+    }
+
+    const addExcerpt = (form) => {
+        fetch(`/excerpts`,{
+        method: 'POST',
+            headers: { 'Content-Type' : 'application/json' },
+            body: JSON.stringify(form)
+        })
+        .then(res => res.json())
+        .then(data => {
+            setExcerpts([...excerpts, data])
+        })
+    }
     
     const login = (user) => {
         setUser(user)
@@ -97,7 +131,7 @@ function UserProvider({ children }) {
     }
 
     return (
-        <UserContext.Provider value = {{user, login, logout, signup, loggedIn, books, fetchBooks, addBook, deleteBook, showBook, currentBook, updateBook}}>
+        <UserContext.Provider value = {{user, login, logout, signup, loggedIn, books, fetchBooks, addBook, deleteBook, showBook, currentBook, updateBook, addExcerpt, excerpts, getExcerpts}}>
             {children}
         </UserContext.Provider>
     )

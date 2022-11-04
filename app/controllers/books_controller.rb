@@ -1,7 +1,6 @@
 class BooksController < ApplicationController
 
     def create
-        # book = current_user.books.create(book_params)
         book = Book.create(book_params)
         if book.valid?
             render json: book
@@ -12,13 +11,11 @@ class BooksController < ApplicationController
 
     def index
         books = Book.all.uniq
-        # books = current_user.books.uniq 
         render json: books
     end
 
     #comment this out
     def show
-        # book = current_user.books.find_by(id: params[:id])
         book = Book.find_by(id: params[:id])
 
         if book
@@ -29,7 +26,6 @@ class BooksController < ApplicationController
     end
 
     def update
-        # book = current_user.books.find_by(id: params[:id])
         book = Book.find_by(id: params[:id])
         if book
             book.update(book_params)
@@ -40,7 +36,6 @@ class BooksController < ApplicationController
     end
 
     def destroy
-        # book = current_user.books.find_by(id: params[:id])
         book = Book.find_by(id: params[:id])
         book.destroy
     end
@@ -51,8 +46,7 @@ class BooksController < ApplicationController
         User.find_by(id: session[:user_id])
     end
 
-
     def book_params
-        params.permit(:title, :author)
+        params.require(:book).permit(:title, :author, excerpts_attributes: [:quote, :context, :page,:user_id])
     end
 end

@@ -1,15 +1,16 @@
 import React, { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { UserContext } from './context/user'
 
-const BookExcerptForm = ({parentBookId}) => {
-    const [author, setAuthor] = useState("")
-    const [title, setTitle] = useState("")
-    const { addBook } = useContext(UserContext)
+const BookExcerptForm = () => {
+    const navigate = useNavigate()
+    const { addBook, addExcerpt } = useContext(UserContext)
     const [form, setForm] = useState({
+        author: "",
+        title: "",
         quote: "",
         context: "",
-        page: "",
-        bookId: parentBookId
+        page: ""
     })
 
     const handleChange = (e) => {
@@ -17,17 +18,13 @@ const BookExcerptForm = ({parentBookId}) => {
             ...form,
             [e.target.id] : e.target.value
         })
-        console.log("BookID", form.bookId)
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        addBook({
-            author: author,
-            title: title
-        })
-        setAuthor("")
-        setTitle("")
+        console.log("Form", form)
+        addBook(form)
+        navigate('/excerpts')
     }
  
   return (
@@ -36,15 +33,15 @@ const BookExcerptForm = ({parentBookId}) => {
         <input
             type="text"
             id="title"
-            value={title}
-            onChange={e => setTitle(e.target.value)}
+            value={form.title}
+            onChange={handleChange}
         /> <br/>
         <label>Author: </label>
         <input 
             type="text"
             id='author'
-            value={author}
-            onChange={e => setAuthor(e.target.value)}
+            value={form.author}
+            onChange={handleChange}
         />
         <br />
         <label>Quote: </label>
