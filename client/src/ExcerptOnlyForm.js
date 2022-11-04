@@ -4,12 +4,12 @@ import { UserContext } from './context/user'
 
 const ExcerptOnlyForm = ({parentBookId, paramBookId}) => {
 
-    const { books, addExcerpt } = useContext(UserContext)
+    const { addExcerpt } = useContext(UserContext)
     const [form, setForm] = useState({
         quote: "",
         context: "",
         page: "",
-        bookId: parentBookId || paramBookId
+        book_id: parentBookId || paramBookId
     })
     const navigate = useNavigate()
     
@@ -18,7 +18,6 @@ const ExcerptOnlyForm = ({parentBookId, paramBookId}) => {
             ...form,
             [e.target.id] : e.target.value
         })
-        console.log("BookId",form.bookId)
     }
 
     const handleSubmit = (e) => {
@@ -27,7 +26,7 @@ const ExcerptOnlyForm = ({parentBookId, paramBookId}) => {
         console.log("form", form)
         console.log("Event Target", e.target)
             addExcerpt(form)
-            navigate(`/books/${form.bookId}`)
+            navigate(`/excerpts`)
     }
 
    return (
