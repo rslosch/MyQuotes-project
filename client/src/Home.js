@@ -7,6 +7,12 @@ const Home = () => {
     const  { user, loggedIn } = useContext(UserContext)
     // const navigate = useNavigate()
 
+    const myBooksList = user.unique_books.map(b => {
+        return (
+        <li key={b.id}> {b.title}</li>
+        )
+    })
+
     if(!loggedIn){
         return (
             // <Signup />
@@ -20,6 +26,7 @@ const Home = () => {
                 <h2> Welcome to your MyBooks Library App! </h2>
                 <h4> Easily store and record memorable quotes from your recently read books.</h4>
                 <h4> Visit the books tab to get started!</h4>
+                {myBooksList}
             </div>
         )
      }
