@@ -27,7 +27,7 @@ const Books = () => {
     if (loggedIn) {
         const booksList = books.map(b => {
             return (
-                <>
+                < div key={b.id}>
                     <Link to={`/books/${b.id}`} key={b.id}>
                         <li>{b.title}: {b.author}</li>
                     </Link>
@@ -35,7 +35,7 @@ const Books = () => {
                         <button id={b.id} onClick={(e) => handleEditClick(b.id)}> Edit </button>
                     </Link>
                     <button id={b.id} onClick={(e) => deleteBook(e.target.id)}> Delete </button>
-                </>
+                </div>
             )
         })   
         return (

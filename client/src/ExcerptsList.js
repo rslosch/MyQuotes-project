@@ -12,7 +12,7 @@ const ExcerptsList = () => {
 
     const excerptList = excerpts.map((e) => {
         return(
-            <div>
+            <div key={e.id}>
                 <h1>"{e.quote}", page #{e.page}</h1>
                 <h3>Context: {e.context}</h3>
                 <h4>{e.book.title}</h4>
@@ -25,7 +25,7 @@ const ExcerptsList = () => {
     <div>
         <div>
             <NavLink to='/excerpts/new'>
-                <button>Add a new Excerpt</button>  
+                <button>Add a new Quote</button>  
             </NavLink>
         </div>
         <div>
