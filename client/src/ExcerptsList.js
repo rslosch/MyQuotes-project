@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { UserContext } from './context/user'
 
 const ExcerptsList = () => {
 
-    const { excerpts, getExcerpts} = useContext(UserContext)
+    const { excerpts, getExcerpts, deleteExcerpt} = useContext(UserContext)
 
     useEffect(() => {
         getExcerpts()
@@ -20,6 +20,7 @@ const ExcerptsList = () => {
                 <NavLink to={`/excerpts/${e.id}/edit`}>
                     <button>Edit</button>
                 </NavLink>
+                <button id={e.id} onClick={(e) => deleteExcerpt(e.target.id)}> Delete</button>
             </div>
         )
     })

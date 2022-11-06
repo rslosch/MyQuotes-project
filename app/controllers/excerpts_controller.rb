@@ -25,6 +25,11 @@ class ExcerptsController < ApplicationController
         end
     end
 
+    def destroy
+        excerpt = Excerpt.find_by(id: params[:id])
+        excerpt.destroy
+    end
+
     private
 
     def current_user

@@ -124,6 +124,17 @@ function UserProvider({ children }) {
             setExcerpts(updatedExcerpts)
         })
     }
+
+    const deleteExcerpt = (id) => {
+        fetch(`/excerpts/${id}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type' : 'application/json' }
+        })
+        .then(() => {
+            const updatedExcerpts = excerpts.filter(e => e.id != id)
+            setExcerpts(updatedExcerpts)
+        })
+    }
     
     const login = (user) => {
         setUser(user)
@@ -144,7 +155,7 @@ function UserProvider({ children }) {
     }
 
     return (
-        <UserContext.Provider value = {{user, login, logout, signup, loggedIn, books, fetchBooks, addBook, deleteBook, showBook, currentBook, updateBook, addExcerpt, excerpts, getExcerpts, updateExcerpt}}>
+        <UserContext.Provider value = {{user, login, logout, signup, loggedIn, books, fetchBooks, addBook, deleteBook, showBook, currentBook, updateBook, addExcerpt, excerpts, getExcerpts, updateExcerpt, deleteExcerpt}}>
             {children}
         </UserContext.Provider>
     )
