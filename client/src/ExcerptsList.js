@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { UserContext } from './context/user'
 
 const ExcerptsList = () => {
@@ -17,6 +17,9 @@ const ExcerptsList = () => {
                 <h3>Context: {e.context}</h3>
                 <h4>{e.book.title}</h4>
                 <h4>By: {e.book.author}</h4>
+                <NavLink to={`/excerpts/${e.id}/edit`}>
+                    <button>Edit</button>
+                </NavLink>
             </div>
         )
     })

@@ -111,6 +111,19 @@ function UserProvider({ children }) {
             setExcerpts([...excerpts, data])
         })
     }
+
+    const updateExcerpt = (id, excerpt) => {
+        fetch(`/excerpts/${id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type' : 'application/json' },
+            body: JSON.stringify(excerpt)
+        })
+        .then(res => res.json())
+        .then(data => {
+            const updatedExcerpts = excerpts.map(e => e.id === data.id ? data : e)
+            setExcerpts(updatedExcerpts)
+        })
+    }
     
     const login = (user) => {
         setUser(user)
@@ -131,7 +144,7 @@ function UserProvider({ children }) {
     }
 
     return (
-        <UserContext.Provider value = {{user, login, logout, signup, loggedIn, books, fetchBooks, addBook, deleteBook, showBook, currentBook, updateBook, addExcerpt, excerpts, getExcerpts}}>
+        <UserContext.Provider value = {{user, login, logout, signup, loggedIn, books, fetchBooks, addBook, deleteBook, showBook, currentBook, updateBook, addExcerpt, excerpts, getExcerpts, updateExcerpt}}>
             {children}
         </UserContext.Provider>
     )

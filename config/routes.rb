@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :books
 
-  resources :excerpts, only: [:index, :create]
+  resources :excerpts
 
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 end

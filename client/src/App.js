@@ -12,6 +12,7 @@ import EditBookForm from './EditBookForm';
 import { UserProvider } from './context/user'
 import ChooseExcerptForm from './ChooseExcerptForm';
 import ExcerptsList from './ExcerptsList';
+import EditExcerptForm from './EditExcerptForm';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/excerpts" element={<ExcerptsList />}/>
+          <Route exact path="/excerpts/:id/edit" element={<EditExcerptForm />} />
           <Route exact path="/books" element={<Books />} />
           <Route exact path="/books/:id" element={<Book />} />
           <Route exact path="/books/new" element={<BookForm/>} />

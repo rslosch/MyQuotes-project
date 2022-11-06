@@ -15,6 +15,16 @@ class ExcerptsController < ApplicationController
         render json: excerpts
     end
 
+    def update
+        excerpt = Excerpt.find_by(id: params[:id])
+        if excerpt
+            excerpt.update(excerpt_params)
+            render json: excerpt
+        else
+            render json: { error: "Not Found" }, status: :unauthorized
+        end
+    end
+
     private
 
     def current_user
