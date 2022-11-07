@@ -36,13 +36,13 @@ function UserProvider({ children }) {
         })
     }
 
-    const showBook = (id) => {
-        fetch(`/books/${id}`)
-        .then(res => res.json())
-        .then(d => {
-            setCurrentBook(d)
-        })
-    }
+    // const showBook = (id) => {
+    //     fetch(`/books/${id}`)
+    //     .then(res => res.json())
+    //     .then(d => {
+    //         setCurrentBook(d)
+    //     })
+    // }
 
     const addBook = (form) => {
         fetch('/books', {
@@ -155,7 +155,7 @@ function UserProvider({ children }) {
     }
 
     return (
-        <UserContext.Provider value = {{user, login, logout, signup, loggedIn, books, fetchBooks, addBook, deleteBook, showBook, currentBook, updateBook, addExcerpt, excerpts, getExcerpts, updateExcerpt, deleteExcerpt}}>
+        <UserContext.Provider value = {{user, login, logout, signup, loggedIn, books, fetchBooks, addBook, deleteBook, currentBook, updateBook, addExcerpt, excerpts, getExcerpts, updateExcerpt, deleteExcerpt}}>
             {children}
         </UserContext.Provider>
     )
