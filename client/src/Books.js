@@ -7,55 +7,20 @@ import { UserContext } from './context/user'
 
 const Books = () => {
 
-    const { loggedIn, books, deleteBook, showBook} = useContext(UserContext)
-    const [formFlag, setFormFlag] = useState(false)
-    const [editFormFlag, setEditFormFlag] = useState(false)
-
-    const addBookFlag = () => {
-        setFormFlag(false)
-    }
-
-    const editBookFlag = () => {
-        setEditFormFlag(false)
-    }
-
-    const handleEditClick = (id) => {
-        setEditFormFlag(true)
-        showBook(id)
-    }
+    const { loggedIn, books } = useContext(UserContext)
     
     if (loggedIn) {
         const booksList = books.map(b => {
             return (
-                < div key={b.id}>
-                    <Link to={`/books/${b.id}`} key={b.id}>
-                        <li>{b.title}: {b.author}</li>
-                    </Link>
-                    <Link to={`/books/${b.id}/edit`}>
-                        <button id={b.id} onClick={(e) => handleEditClick(b.id)}> Edit </button>
-                    </Link>
-                    <button id={b.id} onClick={(e) => deleteBook(e.target.id)}> Delete </button>
-                </div>
+                <li key={b.id}>{b.title}: {b.author}</li>
             )
         })   
         return (
             <div>
-                <h1>Books </h1>
+                <h1>Library of all Books </h1>
                 <br/>
                 {booksList}
                 <br/>
-                <br/>
-                {formFlag ?
-                    <BookForm addBookFlag={addBookFlag} />
-                    :
-                    <button onClick={() => setFormFlag(true)}>Add Book</button>
-                }
-                <br />
-                {editFormFlag ?
-                    <EditBookForm editBookFlag={editBookFlag} />
-                    :
-                    null
-                }
             </div>
         )
     } else {
