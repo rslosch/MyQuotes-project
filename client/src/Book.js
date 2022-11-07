@@ -1,14 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { UserContext } from './context/user'
-import ExcerptList from './ExcerptList'
 import ExcerptOnlyForm from './ExcerptOnlyForm'
 
 const Book = () => {
 
     const [formFlag, setFormFlag] = useState(false)
     const params = useParams()
-    const { showBook, currentBook, fetchExcerpts, excerpts } = useContext(UserContext)
+    const { showBook, currentBook } = useContext(UserContext)
 
     useEffect(() => {
         showBook(params.id)
