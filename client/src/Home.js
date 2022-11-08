@@ -1,7 +1,5 @@
 import React, { useContext } from 'react'
 import { UserContext } from './context/user'
-import { useNavigate, NavLink } from 'react-router-dom'
-import Signup from './Signup'
 
 const Home = () => {
     const  { user, loggedIn } = useContext(UserContext)
