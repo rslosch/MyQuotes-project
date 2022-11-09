@@ -109,14 +109,13 @@ const Navbar = () => {
     )
   } else {
     return (
-      <div>
+      <div className={classes.root}>
         <NavLink to='/login'>
-          <button>Login</button>  
+          <Button variant="contained" color="primary">Login</Button>  
         </NavLink>
         <NavLink to='/signup'>
-          <button>Signup</button>  
+          <Button variant="contained" color="primary">Signup</Button>  
         </NavLink>
-        <hr/>
       </div>
     )
   }
