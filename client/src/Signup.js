@@ -1,13 +1,36 @@
 import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from './context/user'
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button'; 
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        '& .MuiFormControl-root': {
+            width: '80%',
+            margin: theme.spacing(1),
+        }
+    },
+    grid: {
+        justifyContent:"center"
+    },
+    error: {
+        color: "red"
+    }
+}))
+
+ 
 const Signup = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [passwordConfirmation, setPasswordConfirmation] = useState("")
     const [errorsList, setErrorsList] = useState([])
     const { signup } = useContext(UserContext)
+    const classes = useStyles()
 
     const navigate = useNavigate()
 
@@ -31,39 +54,40 @@ const Signup = () => {
                 setUsername("")
                 setPassword("")
                 setPasswordConfirmation("")
-                const errorLis = user.errors.map(error => <li key={error.id}> {error} </li>)
+                const errorLis = user.errors.map(error => <Typography key={error.id} className={classes.error} variant="h5"> {error} </Typography>)
                 setErrorsList(errorLis)
             }
         })
     }
 
   return (
-    <div>
+    <div className={classes.root}>
         <form onSubmit={handleSubmit}>
-            <label> Username: </label>
-            <input 
-                type="text"
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            /> <br />
-            <label> Password: </label>
-            <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            /> <br />
-            <label> Confirm Password: </label>
-            <input
-                type="password"
-                id="password_confirmation"
-                value={passwordConfirmation}
-                onChange={(e) => setPasswordConfirmation(e.target.value)}
-            /> <br />
-            <input type="submit" />
+            <Grid container className={classes.grid}>
+                <Grid item xs={6}>
+                    <TextField 
+                        variant="outlined"
+                        label="Username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <TextField 
+                        variant="outlined"
+                        label="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <TextField 
+                        variant="outlined"
+                        label="Confirm Password"
+                        value={passwordConfirmation}
+                        onChange={(e) => setPasswordConfirmation(e.target.value)}
+                    />
+                </Grid>
+            </Grid>
+            <Button type="submit" variant="contained" size="large" color="primary" > Sign up </Button>
         </form>
-        <ul>
+        <ul className={classes.grid}>
             {errorsList}
         </ul>
     </div>
