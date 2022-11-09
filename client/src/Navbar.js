@@ -16,13 +16,17 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    justifyContent: "center",
   },
   menuButton: {
     marginRight: theme.spacing(2)
   },
   title: {
     flexGrow: 1,
+  },
+  navLinks: {
+    margin: 10
   }
 }))
 
@@ -109,13 +113,17 @@ const Navbar = () => {
     )
   } else {
     return (
-      <div className={classes.root}>
-        <NavLink to='/login'>
-          <Button variant="contained" color="primary">Login</Button>  
-        </NavLink>
-        <NavLink to='/signup'>
-          <Button variant="contained" color="primary">Signup</Button>  
-        </NavLink>
+      <div>
+        <AppBar position="static">
+          <Toolbar className={classes.root}>
+            <NavLink to='/login' className={classes.navLinks}>
+              <Button variant="contained" color="default">Login</Button>  
+            </NavLink>
+            <NavLink to='/signup' className={classes.navLinks}>
+              <Button variant="contained" color="default">Signup</Button>  
+            </NavLink>
+          </Toolbar>
+        </AppBar>
       </div>
     )
   }
