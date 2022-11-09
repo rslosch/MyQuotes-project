@@ -38,8 +38,8 @@ const Navbar = () => {
       method: 'DELETE',
     })
     .then(() => {
+      navigate('/login')
       logout()
-      navigate('/')
     })
   }
 
@@ -102,7 +102,7 @@ const Navbar = () => {
 
             <Typography variant='h6' className={classes.title}>Welcome, {user.username}</Typography>
 
-            <Button onClick={logoutUser}>Logout</Button>
+            <Button variant='contained' onClick={logoutUser}>Logout</Button>
           </Toolbar>
         </AppBar>
       </div>
