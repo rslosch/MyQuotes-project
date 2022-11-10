@@ -99,7 +99,7 @@ const Login = () => {
           </Paper>
         </Grid>
       </form>
-      <ul>
+      <ul className={classes.error}>
         {error}
       </ul>
     </div>
