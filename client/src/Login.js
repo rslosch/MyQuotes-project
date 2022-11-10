@@ -9,6 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,7 +19,9 @@ const useStyles = makeStyles(theme => ({
       justifyContent:"center"
   },
   error: {
-      color: "red"
+      color: "red",
+      justifyContent:"center",
+      marginTop:10
   },
   tbPad: {
     paddingTop:20,
@@ -57,7 +60,7 @@ const Login = () => {
         } else {
           setUsername("")
           setPassword("")
-          const errorLi = <li> {user.error} </li>
+          const errorLi = <Grid item> {user.error} </Grid>
           setError(errorLi)
         }
       })
@@ -99,9 +102,12 @@ const Login = () => {
           </Paper>
         </Grid>
       </form>
-      <ul className={classes.error}>
+      <Grid container className={classes.error} >
         {error}
-      </ul>
+      </Grid>
+      {/* <ul className={classes.error}>
+        {error}
+      </ul> */}
     </div>
   )
 }
