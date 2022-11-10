@@ -5,23 +5,31 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'; 
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Avatar from '@material-ui/core/Avatar';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 import Typography from '@material-ui/core/Typography';
 
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(({
     root: {
-        '& .MuiFormControl-root': {
-            width: '80%',
-            margin: theme.spacing(1),
-        }
+        margin:30
     },
-    grid: {
+    center: {
         justifyContent:"center"
     },
     error: {
         color: "red"
+    },
+    tbPad: {
+      paddingTop:20,
+      paddingBottom:20
+    },
+    tbMargin:{
+      marginTop:8,
+      marginBottom:8
     }
-}))
+  }))
+  
 
  
 const Signup = () => {
@@ -63,29 +71,43 @@ const Signup = () => {
   return (
     <div className={classes.root}>
         <form onSubmit={handleSubmit}>
-            <Grid container className={classes.grid}>
-                <Grid item xs={6}>
-                    <TextField 
-                        variant="outlined"
-                        label="Username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <TextField 
-                        variant="outlined"
-                        label="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <TextField 
-                        variant="outlined"
-                        label="Confirm Password"
-                        value={passwordConfirmation}
-                        onChange={(e) => setPasswordConfirmation(e.target.value)}
-                    />
-                </Grid>
+            <Grid container className={classes.center} align="center">
+                <Paper elevation={10} className={classes.tbPad}>
+                    <Grid align="center" >
+                        <Avatar>
+                            <LockOpenIcon />
+                        </Avatar>
+                        <Typography variant="h4">Sign up</Typography>
+                    </Grid>
+                    <Grid item xs={4} align="center">
+                        <TextField 
+                            fullWidth
+                            className={classes.tbMargin}
+                            variant="outlined"
+                            label="Username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                        <TextField 
+                            fullWidth
+                            className={classes.tbMargin}
+                            variant="outlined"
+                            label="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <TextField 
+                            fullWidth
+                            className={classes.tbMargin}
+                            variant="outlined"
+                            label="Confirm Password"
+                            value={passwordConfirmation}
+                            onChange={(e) => setPasswordConfirmation(e.target.value)}
+                        />
+                        <Button className={classes.tbMargin} type="submit" variant="contained" size="large" color="primary" > Sign up </Button>
+                    </Grid>
+                </Paper>
             </Grid>
-            <Button type="submit" variant="contained" size="large" color="primary" > Sign up </Button>
         </form>
         <ul className={classes.grid}>
             {errorsList}
