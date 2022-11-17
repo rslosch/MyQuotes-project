@@ -20,7 +20,7 @@ const Books = () => {
     if (loggedIn) {
         const booksList = books.map(b => {
             return (
-                <ListItem>
+                <ListItem key={b.id}>
                     <ListItemIcon>
                         <LocalLibraryIcon />
                     </ListItemIcon>

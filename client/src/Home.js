@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { UserContext } from './context/user'
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box'
@@ -11,7 +11,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 const Home = () => {
     const  { user, loggedIn } = useContext(UserContext)
-    // const navigate = useNavigate()
 
     if(!loggedIn){
         return (
@@ -23,13 +22,12 @@ const Home = () => {
     } else {
         const myBooksList = user.unique_books.map(b => {
             return (
-                <ListItem>
+                <ListItem key={b.id}>
                     <ListItemIcon>
                         <LocalLibraryIcon />
                     </ListItemIcon>
                     <ListItemText primary={b.title} secondary={b.author}/>
                 </ListItem>
-            // <li key={b.id}> {b.title}</li>
             )
         })
         return (

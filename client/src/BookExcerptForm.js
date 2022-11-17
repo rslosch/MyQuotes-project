@@ -22,7 +22,6 @@ const BookExcerptForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log("Form", form)
         addBook(form)
         navigate('/excerpts')
     }
