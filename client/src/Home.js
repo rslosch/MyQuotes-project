@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { UserContext } from './context/user'
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box'
@@ -14,10 +14,10 @@ const Home = () => {
 
     if(!loggedIn){
         return (
-            <>
+            <div>
                 <br/>
                 <Typography variant="h3"> Please Login or Signup Above </Typography>
-            </>
+            </div>
         )
     } else {
         const myBooksList = user.unique_books.map(b => {
