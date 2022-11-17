@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { json } from 'react-router-dom'
 
 //Create the context object
 const UserContext = React.createContext()
@@ -12,20 +11,19 @@ function UserProvider({ children }) {
     const [loggedIn, setLoggedIn] = useState(false)
     const [books, setBooks] = useState([])
     const [excerpts, setExcerpts] = useState([])
-    const [currentBook, setCurrentBook] = useState({})
 
     useEffect(() => {
-        fetch('/me')
-        .then(res => res.json())
-        .then(data => {
-            setUser(data)
-            if(data.error){
-                setLoggedIn(false)
-            } else {
-                setLoggedIn(true)
-                fetchBooks()
-            }
-        })
+            fetch('/me')
+            .then(res => res.json())
+            .then(data => {
+                setUser(data)
+                if(data.error){
+                    setLoggedIn(false)
+                } else {
+                    setLoggedIn(true)
+                    fetchBooks()
+                }
+            })
     }, [])
 
     const fetchBooks = () => {
@@ -34,15 +32,8 @@ function UserProvider({ children }) {
         .then(data => {
             setBooks(data)
         })
-    }
 
-    // const showBook = (id) => {
-    //     fetch(`/books/${id}`)
-    //     .then(res => res.json())
-    //     .then(d => {
-    //         setCurrentBook(d)
-    //     })
-    // }
+    }
 
     const addBook = (form) => {
         fetch('/books', {
@@ -155,7 +146,7 @@ function UserProvider({ children }) {
     }
 
     return (
-        <UserContext.Provider value = {{user, login, logout, signup, loggedIn, books, fetchBooks, addBook, deleteBook, currentBook, updateBook, addExcerpt, excerpts, getExcerpts, updateExcerpt, deleteExcerpt}}>
+        <UserContext.Provider value = {{user, login, logout, signup, loggedIn, books, fetchBooks, addBook, deleteBook, updateBook, addExcerpt, excerpts, getExcerpts, updateExcerpt, deleteExcerpt}}>
             {children}
         </UserContext.Provider>
     )
